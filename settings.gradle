@@ -1,2 +1,3 @@
-include ':app'
+include ':horizontallyCardsLibrary'
+include ':sample'
 rootProject.name = "HorizontallyCards"
