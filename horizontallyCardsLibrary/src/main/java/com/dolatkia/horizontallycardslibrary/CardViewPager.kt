@@ -15,7 +15,7 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 
 class CardViewPager : FrameLayout {
 
-    lateinit var viewPager2: ViewPager2
+    private lateinit var viewPager2: ViewPager2
     private var adapter: ViewPagerAdapter? = null
     private var recyclerView: RecyclerView? = null
     private var linearLayoutManager: LinearLayoutManager? = null
@@ -47,10 +47,9 @@ class CardViewPager : FrameLayout {
         viewPager2.offscreenPageLimit = 2
         viewPager2.clipToPadding = false
         viewPager2.clipChildren = false
-        viewPager2.scaleX = -1f
+//        viewPager2.scaleX = -1f
         addView(viewPager2)
         setPageTransformer()
-        setAdapter()
     }
 
     /* Utilities */
@@ -66,9 +65,9 @@ class CardViewPager : FrameLayout {
         }
     }
 
-    private fun setAdapter() {
+    public fun setAdapter(cartViewPagerAdapter: CartViewPagerAdapter) {
         if (adapter == null) {
-            adapter = ViewPagerAdapter(context)
+            adapter = ViewPagerAdapter(context, cartViewPagerAdapter)
         }
         viewPager2.adapter = adapter
         viewPager2.registerOnPageChangeCallback(object : OnPageChangeCallback() {
@@ -126,5 +125,4 @@ class CardViewPager : FrameLayout {
             }
         }
     }
-
 }

@@ -9,10 +9,17 @@
         <carbon.widget.FrameLayout
             android:id="@+id/child"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="#ffffff"
+            android:elevation="3dp"
             bind:carbon_cornerRadiusTopEnd="12dp"
-            bind:carbon_cornerRadiusTopStart="12dp" />
+            bind:carbon_cornerRadiusTopStart="12dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </carbon.widget.FrameLayout>
     </FrameLayout>
 </layout>
 
