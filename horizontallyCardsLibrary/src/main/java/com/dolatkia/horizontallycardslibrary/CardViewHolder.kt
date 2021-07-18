@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SmoothScroller
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.shape.CornerFamily
 
 
 class CardViewHolder(itemView: View, var adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) :
@@ -15,7 +17,7 @@ class CardViewHolder(itemView: View, var adapter: RecyclerView.Adapter<RecyclerV
     private lateinit var layoutManager: LinearLayoutManager
     private var scale = 0f
     var expandThreshold = 0
-    private var child: carbon.widget.FrameLayout = itemView.findViewById(R.id.child)
+    private var child: MaterialCardView = itemView.findViewById(R.id.child) as MaterialCardView
     private var recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
     var startScrollTime = 0L
 
@@ -87,11 +89,25 @@ class CardViewHolder(itemView: View, var adapter: RecyclerView.Adapter<RecyclerV
 //                        ThemeManager.getCurrentTheme().bd_roundedBackground(activity)
 //                    )
 //                    bookDetailsExpandedRunnable.onExpandChanged(true)
+
+                    child.shapeAppearanceModel =
+                        child.shapeAppearanceModel
+                            .toBuilder()
+                            .setTopLeftCorner(CornerFamily.ROUNDED, ((1- ( offset / expandThreshold.toFloat())) * PresentationUtils.convertDpToPixel(15, itemView.context)).toFloat())
+                            .setTopRightCorner(CornerFamily.ROUNDED, ((1- ( offset / expandThreshold.toFloat())) * PresentationUtils.convertDpToPixel(15, itemView.context)).toFloat())
+                            .build()
+
                 } else {
                     param.height = FrameLayout.LayoutParams.MATCH_PARENT
                     child.scaleX = finalScale
                     child.scaleY = finalScale
-                    child.setCornerRadius(0f)
+
+                    child.shapeAppearanceModel =
+                        child.shapeAppearanceModel
+                            .toBuilder()
+                            .setTopLeftCorner(CornerFamily.ROUNDED, 0f)
+                            .setTopRightCorner(CornerFamily.ROUNDED, 0f)
+                            .build()
 //                    child.setBackgroundColor(ThemeManager.getCurrentTheme().background(activity))
 //                    bookDetailsExpandedRunnable.onExpandChanged(false)
                 }

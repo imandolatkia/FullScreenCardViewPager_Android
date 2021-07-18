@@ -6,20 +6,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <carbon.widget.FrameLayout
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/child"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:elevation="3dp"
-            bind:carbon_cornerRadiusTopEnd="12dp"
-            bind:carbon_cornerRadiusTopStart="12dp">
+            bind:cardBackgroundColor="#FFFFFF"
+            bind:cardElevation="3dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </carbon.widget.FrameLayout>
+                android:layout_height="wrap_content" />
+        </com.google.android.material.card.MaterialCardView>
     </FrameLayout>
 </layout>
 
