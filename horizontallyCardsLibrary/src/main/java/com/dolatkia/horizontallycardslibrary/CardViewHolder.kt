@@ -95,6 +95,8 @@ class CardViewHolder(itemView: View, var adapter: RecyclerView.Adapter<RecyclerV
                             .toBuilder()
                             .setTopLeftCorner(CornerFamily.ROUNDED, ((1- ( offset / expandThreshold.toFloat())) * PresentationUtils.convertDpToPixel(15, itemView.context)).toFloat())
                             .setTopRightCorner(CornerFamily.ROUNDED, ((1- ( offset / expandThreshold.toFloat())) * PresentationUtils.convertDpToPixel(15, itemView.context)).toFloat())
+                            .setBottomRightCorner(CornerFamily.ROUNDED, 0f)
+                            .setBottomLeftCorner(CornerFamily.ROUNDED, 0f)
                             .build()
 
                 } else {
@@ -107,6 +109,8 @@ class CardViewHolder(itemView: View, var adapter: RecyclerView.Adapter<RecyclerV
                             .toBuilder()
                             .setTopLeftCorner(CornerFamily.ROUNDED, 0f)
                             .setTopRightCorner(CornerFamily.ROUNDED, 0f)
+                            .setBottomRightCorner(CornerFamily.ROUNDED, 0f)
+                            .setBottomLeftCorner(CornerFamily.ROUNDED, 0f)
                             .build()
 //                    child.setBackgroundColor(ThemeManager.getCurrentTheme().background(activity))
 //                    bookDetailsExpandedRunnable.onExpandChanged(false)
