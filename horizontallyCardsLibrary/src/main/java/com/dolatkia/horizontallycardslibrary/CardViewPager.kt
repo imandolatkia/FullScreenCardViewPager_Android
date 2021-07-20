@@ -6,7 +6,6 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +14,7 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 
 class CardViewPager : FrameLayout {
 
-    private lateinit var viewPager2: ViewPager2
+    protected lateinit var viewPager2: ViewPager2
     private var adapter: ViewPagerAdapter? = null
     private var recyclerView: RecyclerView? = null
     private var linearLayoutManager: LinearLayoutManager? = null
@@ -67,8 +66,9 @@ class CardViewPager : FrameLayout {
 
     public fun setAdapter(cartViewPagerAdapter: CartViewPagerAdapter) {
         if (adapter == null) {
-            adapter = ViewPagerAdapter(context, cartViewPagerAdapter)
+            adapter = ViewPagerAdapter(context, cartViewPagerAdapter, ExpandedRunnable(viewPager2))
         }
+        cartViewPagerAdapter.setViewPagerAdapterAdapter(adapter!!)
         viewPager2.adapter = adapter
         viewPager2.registerOnPageChangeCallback(object : OnPageChangeCallback() {
             override fun onPageScrolled(
@@ -124,5 +124,11 @@ class CardViewPager : FrameLayout {
 //                linearLayoutManager?.scrollToPosition(position)
             }
         }
+    }
+}
+
+class ExpandedRunnable(private val viewPager2: ViewPager2) {
+    fun onExpandChanged(isExpanded: Boolean) {
+        viewPager2.isUserInputEnabled = isExpanded
     }
 }

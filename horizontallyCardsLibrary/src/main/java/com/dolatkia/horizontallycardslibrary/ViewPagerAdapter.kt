@@ -9,7 +9,8 @@ import java.util.*
 
 class ViewPagerAdapter(
     private val activity: Context,
-    val cartViewPagerAdapter: CartViewPagerAdapter
+    val cartViewPagerAdapter: CartViewPagerAdapter,
+    val expandedRunnable: ExpandedRunnable
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val TYPE_BOOK = 0
@@ -29,7 +30,7 @@ class ViewPagerAdapter(
         if (viewType == TYPE_BOOK) {
             val view: View =
                 LayoutInflater.from(activity).inflate(R.layout.item_card, parent, false)
-            return CardViewHolder(view, cartViewPagerAdapter.onCreateCardRecyclerViewAdapter())
+            return CardViewHolder(view, cartViewPagerAdapter.onCreateCardRecyclerViewAdapter(), expandedRunnable)
         } else {
             return LoadingCardViewHolder(
                 LayoutInflater.from(activity)
@@ -44,8 +45,8 @@ class ViewPagerAdapter(
                 val holder: CardViewHolder = holder as CardViewHolder
                 cartViewPagerAdapter.onBindCardRecyclerViewAdapter(holder.getRecyclerAdapter(), position)
             }
-        } else if (!isLoading) {
-            isLoading = true
+        } else {
+//            isLoading = true
             cartViewPagerAdapter.loadData()
         }
     }

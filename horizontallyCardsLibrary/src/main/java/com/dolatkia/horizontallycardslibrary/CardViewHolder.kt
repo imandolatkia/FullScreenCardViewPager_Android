@@ -12,7 +12,7 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.shape.CornerFamily
 
 
-class CardViewHolder(itemView: View, var adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) :
+class CardViewHolder(itemView: View, var adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>, val expandedRunnable: ExpandedRunnable) :
     RecyclerView.ViewHolder(itemView) {
     private lateinit var layoutManager: LinearLayoutManager
     private var scale = 0f
@@ -79,6 +79,8 @@ class CardViewHolder(itemView: View, var adapter: RecyclerView.Adapter<RecyclerV
                 val param =
                     child.getLayoutParams() as FrameLayout.LayoutParams
                 if (expandThreshold != 0 && offset <= expandThreshold/* && firstVisibleItem == 0*/) {
+
+                    expandedRunnable.onExpandChanged(true)
                     param.height =
                         (PresentationUtils.getScreenHeightInPx(itemView.context) * 1.5f).toInt()
                     val scaleX =
@@ -100,6 +102,8 @@ class CardViewHolder(itemView: View, var adapter: RecyclerView.Adapter<RecyclerV
                             .build()
 
                 } else {
+                    expandedRunnable.onExpandChanged(false)
+
                     param.height = FrameLayout.LayoutParams.MATCH_PARENT
                     child.scaleX = finalScale
                     child.scaleY = finalScale
