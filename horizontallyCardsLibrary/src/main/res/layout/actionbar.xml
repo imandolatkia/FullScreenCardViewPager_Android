@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:id="@+id/rootView"
+        android:paddingBottom="6dp"
+        android:clipToPadding="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/actionBarBg"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:cardBackgroundColor="#ffffff"
+            app:cardElevation="3dp" />
+
+        <ImageView
+            android:id="@+id/closeImage"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="20dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_close" />
+
+    </FrameLayout>
+</layout>

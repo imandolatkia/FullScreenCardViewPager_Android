@@ -30,7 +30,7 @@ class ViewPagerAdapter(
         if (viewType == TYPE_BOOK) {
             val view: View =
                 LayoutInflater.from(activity).inflate(R.layout.item_card, parent, false)
-            return CardViewHolder(view, cartViewPagerAdapter.onCreateCardRecyclerViewAdapter(), expandedRunnable)
+            return CardViewHolder(view as ViewGroup, cartViewPagerAdapter.onCreateCardRecyclerViewAdapter(), expandedRunnable)
         } else {
             return LoadingCardViewHolder(
                 LayoutInflater.from(activity)

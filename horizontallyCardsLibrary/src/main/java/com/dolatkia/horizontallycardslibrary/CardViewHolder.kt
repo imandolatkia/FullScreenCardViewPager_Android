@@ -2,8 +2,10 @@ package com.dolatkia.horizontallycardslibrary
 
 import android.util.DisplayMetrics
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.FrameLayout
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +14,11 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.shape.CornerFamily
 
 
-class CardViewHolder(itemView: View, var adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>, val expandedRunnable: ExpandedRunnable) :
+class CardViewHolder(
+    itemView: ViewGroup,
+    var adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>,
+    val expandedRunnable: ExpandedRunnable
+) :
     RecyclerView.ViewHolder(itemView) {
     private lateinit var layoutManager: LinearLayoutManager
     private var scale = 0f
@@ -20,6 +26,8 @@ class CardViewHolder(itemView: View, var adapter: RecyclerView.Adapter<RecyclerV
     private var child: MaterialCardView = itemView.findViewById(R.id.child) as MaterialCardView
     private var recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
     var startScrollTime = 0L
+    var actionBar: ActionBar = ActionBar(itemView.context, null)
+
 
     init {
         //fix size
@@ -45,6 +53,11 @@ class CardViewHolder(itemView: View, var adapter: RecyclerView.Adapter<RecyclerV
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
 
+        ViewCompat.setTranslationZ(
+            actionBar.getView(),
+            6f
+        )
+        itemView.addView(actionBar.getView(), ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT))
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
@@ -92,14 +105,30 @@ class CardViewHolder(itemView: View, var adapter: RecyclerView.Adapter<RecyclerV
 //                    )
 //                    bookDetailsExpandedRunnable.onExpandChanged(true)
 
+
+                    expandedRunnable.onScroll(offset)
+
                     child.shapeAppearanceModel =
                         child.shapeAppearanceModel
                             .toBuilder()
-                            .setTopLeftCorner(CornerFamily.ROUNDED, ((1- ( offset / expandThreshold.toFloat())) * PresentationUtils.convertDpToPixel(15, itemView.context)).toFloat())
-                            .setTopRightCorner(CornerFamily.ROUNDED, ((1- ( offset / expandThreshold.toFloat())) * PresentationUtils.convertDpToPixel(15, itemView.context)).toFloat())
+                            .setTopLeftCorner(
+                                CornerFamily.ROUNDED,
+                                ((1 - (offset / expandThreshold.toFloat())) * PresentationUtils.convertDpToPixel(
+                                    15,
+                                    itemView.context
+                                )).toFloat()
+                            )
+                            .setTopRightCorner(
+                                CornerFamily.ROUNDED,
+                                ((1 - (offset / expandThreshold.toFloat())) * PresentationUtils.convertDpToPixel(
+                                    15,
+                                    itemView.context
+                                )).toFloat()
+                            )
                             .setBottomRightCorner(CornerFamily.ROUNDED, 0f)
                             .setBottomLeftCorner(CornerFamily.ROUNDED, 0f)
                             .build()
+
 
                 } else {
                     expandedRunnable.onExpandChanged(false)
@@ -119,6 +148,8 @@ class CardViewHolder(itemView: View, var adapter: RecyclerView.Adapter<RecyclerV
 //                    child.setBackgroundColor(ThemeManager.getCurrentTheme().background(activity))
 //                    bookDetailsExpandedRunnable.onExpandChanged(false)
                 }
+                actionBar.updateUI(offset, expandThreshold)
+
                 child.layoutParams = param
             }
         })

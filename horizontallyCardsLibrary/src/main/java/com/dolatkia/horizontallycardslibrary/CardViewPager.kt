@@ -1,6 +1,7 @@
 package com.dolatkia.horizontallycardslibrary
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Build
 import android.util.AttributeSet
 import android.view.View
@@ -47,6 +48,8 @@ class CardViewPager : FrameLayout {
         viewPager2.clipToPadding = false
         viewPager2.clipChildren = false
 //        viewPager2.scaleX = -1f
+
+        setBackgroundColor(Color.parseColor("#444444"))
         addView(viewPager2)
         setPageTransformer()
     }
@@ -127,8 +130,3 @@ class CardViewPager : FrameLayout {
     }
 }
 
-class ExpandedRunnable(private val viewPager2: ViewPager2) {
-    fun onExpandChanged(isExpanded: Boolean) {
-        viewPager2.isUserInputEnabled = isExpanded
-    }
-}
