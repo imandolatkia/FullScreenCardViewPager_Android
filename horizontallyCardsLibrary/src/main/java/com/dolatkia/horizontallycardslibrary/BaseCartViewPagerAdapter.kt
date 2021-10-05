@@ -10,20 +10,44 @@ abstract class BaseCartViewPagerAdapter : RecyclerView.Adapter<RecyclerView.View
 
     abstract fun getCardRecyclerViewAdapter(position: Int): RecyclerView.Adapter<RecyclerView.ViewHolder>
     abstract fun getCardsCount(): Int
-    abstract fun onCreateActionBarCustomView(): View?
-    abstract fun onBindActionBarCustomView(position: Int, customView: View)
-    abstract fun onVerticalScrolled(recyclerView: RecyclerView, dy: Int, offset: Int, customActionBarView: View?)
-    abstract fun getOnCloseClickListener(position: Int, context: Context): View.OnClickListener
-    open fun onCardSelected(position: Int, adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) {}
-    open fun onCardDeselected(position: Int, adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) {}
+    abstract fun onVerticalScrolled(
+        recyclerView: RecyclerView,
+        dy: Int,
+        offset: Int,
+        customActionBarView: View?
+    )
 
-    open fun getActionBarStartAnimationOffsetThreshold(recyclerView: RecyclerView, customActionBarView: View?): Int {
-        return  PresentationUtils.convertDpToPixel(50, recyclerView.context)
+    abstract fun getOnCloseClickListener(position: Int, context: Context): View.OnClickListener
+
+    open fun onCreateActionBarCustomView(): View? {
+        return null
+    }
+
+    open fun onBindActionBarCustomView(position: Int, customView: View) {}
+
+    open fun onCardSelected(
+        position: Int,
+        adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
+    ) {
     }
 
     open fun loadData() {}
+
     open fun hasMoreData(): Boolean {
         return false
+    }
+
+    open fun onCardDeselected(
+        position: Int,
+        adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
+    ) {
+    }
+
+    open fun getActionBarStartAnimationOffsetThreshold(
+        recyclerView: RecyclerView,
+        customActionBarView: View?
+    ): Int {
+        return PresentationUtils.convertDpToPixel(50, recyclerView.context)
     }
 
     open fun getCardsColor(position: Int, context: Context): Int {
