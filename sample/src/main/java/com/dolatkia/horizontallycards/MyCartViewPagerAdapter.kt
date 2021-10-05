@@ -1,18 +1,20 @@
 package com.dolatkia.horizontallycards
 
+import android.app.Activity
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.dolatkia.horizontallycards.databinding.ItemActionbarBinding
 import com.dolatkia.horizontallycards.viewholders.BoxViewHolder
 import com.dolatkia.horizontallycards.viewholders.HorizontalBoxesViewHolder
 import com.dolatkia.horizontallycards.viewholders.TextViewHolder
 import com.dolatkia.horizontallycardslibrary.CartViewPagerAdapter
-import java.util.*
 
-class MyCartViewPagerAdapter(private val context: Context) : CartViewPagerAdapter() {
+class MyCartViewPagerAdapter(private val activity: Activity) : CartViewPagerAdapter(activity) {
 
     private val itemTouchHelper = arrayListOf<Int>()
 
@@ -20,34 +22,32 @@ class MyCartViewPagerAdapter(private val context: Context) : CartViewPagerAdapte
         addFakeItems()
     }
 
-    override fun onCreateCardRecyclerViewAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder> {
-        return InnerRecyclerAdapter(context)
+    override fun getCardRecyclerViewAdapter(position: Int): RecyclerView.Adapter<RecyclerView.ViewHolder> {
+        return InnerRecyclerAdapter(activity, position)
     }
-
-    override fun onBindCardRecyclerViewAdapter(
-        adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>,
-        position: Int
-    ) {
-        (adapter as InnerRecyclerAdapter).setPosition(position)
-    }
-
 
     override fun getCardsCount(): Int {
         return itemTouchHelper.size
     }
 
-    override fun loadData() {
-        Handler(Looper.getMainLooper()).postDelayed(
-            {
-                addFakeItems()
-                notifyDataSetChanged()
-            },
-            2000 // value in milliseconds
-        )
+    override fun onCreateActionBarCustomView(): View? {
+        return ItemActionbarBinding.inflate(activity.layoutInflater).root
     }
 
-    override fun hasMoreData(): Boolean {
-        return true
+    override fun onBindActionBarCustomView(position: Int, customView: View) {
+        ItemActionbarBinding.bind(customView).title.text = "Title "+(position+1).toString()
+    }
+
+    override fun onVerticalScrolled(
+        recyclerView: RecyclerView,
+        dy: Int,
+        offset: Int,
+        customActionBarView: View?
+    ) {
+    }
+
+    override fun getOnCloseClickListener(position: Int, context: Context): View.OnClickListener {
+        return View.OnClickListener { activity.onBackPressed() }
     }
 
     fun addFakeItems() {
@@ -55,22 +55,31 @@ class MyCartViewPagerAdapter(private val context: Context) : CartViewPagerAdapte
             itemTouchHelper.add(0)
         }
     }
+
+    override fun loadData() {
+        Handler(Looper.getMainLooper()).postDelayed(
+            {
+                addFakeItems()
+                notifyDataSetChanged()
+                dataLoaded()
+            },
+            1000 // value in milliseconds
+        )
+    }
+
+    override fun hasMoreData(): Boolean {
+        return true
+    }
 }
 
 
-class InnerRecyclerAdapter(private val context: Context) :
+class InnerRecyclerAdapter(private val context: Context, private var cardPosition: Int) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var mPosition: Int = 0
     val TYPE_ROW_SINGLE_BOX = 0
     val TYPE_ROW_TEXT = 1
     val TYPE_ROW_HORIZONTAL_BOXES = 2
     val TYPE_ROW_FULL_BOXES = 3
-
-    public fun setPosition(position: Int) {
-        mPosition = position;
-        notifyDataSetChanged()
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -101,7 +110,7 @@ class InnerRecyclerAdapter(private val context: Context) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is BoxViewHolder) {
             holder.setRandomColor()
-            holder.num?.text = (mPosition + 1).toString()
+            holder.num?.text = (this.cardPosition + 1).toString()
         }
     }
 

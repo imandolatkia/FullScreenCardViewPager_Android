@@ -9,10 +9,10 @@ class PresentationUtils {
 
     companion object {
 
-        private lateinit var DISPLAY_METRIC: DisplayMetrics
+        private var DISPLAY_METRIC: DisplayMetrics? = null
 
         /* get screen dimen */
-        private fun getDisplayMetrics(context: Context): DisplayMetrics {
+        private fun getDisplayMetrics(context: Context): DisplayMetrics? {
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
                 return context.resources.displayMetrics
             } else if (DISPLAY_METRIC == null) {
@@ -22,7 +22,7 @@ class PresentationUtils {
         }
 
         fun getScreenWidthInPx(context: Context): Int {
-           return getDisplayMetrics(context)!!.widthPixels
+            return getDisplayMetrics(context)!!.widthPixels
         }
 
         fun getScreenHeightInPx(context: Context): Int {
@@ -30,8 +30,7 @@ class PresentationUtils {
         }
 
         fun convertDpToPixel(dp: Int, context: Context): Int {
-            val px =
-                dp * (getDisplayMetrics(context).densityDpi / 160f)
+            val px = dp * (getDisplayMetrics(context)!!.densityDpi / 160f)
             return px.roundToInt()
         }
     }

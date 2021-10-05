@@ -3,12 +3,12 @@ package com.dolatkia.horizontallycardslibrary
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
 
-class ExpandedRunnable(private val viewPager2: ViewPager2) {
-    fun onExpandChanged(isExpanded: Boolean) {
-        viewPager2.isUserInputEnabled = isExpanded
+class ViewPagerCardsChangeListener(private val viewPager2: ViewPager2) : CardsChangeListener {
+    override fun onExpandChanged(isExpanded: Boolean) {
+        viewPager2.isUserInputEnabled = !isExpanded
     }
 
-    fun onScroll(offset: Int) {
+    override fun onScroll(offset: Int) {
         val pageOffset: Int = PresentationUtils.convertDpToPixel(25, viewPager2.context)
         viewPager2.setPageTransformer { view: View, position: Float ->
             var myOffset = 0f;
@@ -17,9 +17,9 @@ class ExpandedRunnable(private val viewPager2: ViewPager2) {
             }
 
             if (position > 0) {
-                myOffset += offset / 4
+                myOffset += offset / 3
             } else if (position < 0) {
-                myOffset -= offset / 4
+                myOffset -= offset / 3
             }
             view.translationX = myOffset
         }
