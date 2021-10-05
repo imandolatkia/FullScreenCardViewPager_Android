@@ -16,6 +16,7 @@ import com.dolatkia.horizontallycards.viewholders.HorizontalBoxesViewHolder
 import com.dolatkia.horizontallycards.viewholders.GeneralViewHolder
 import com.dolatkia.horizontallycards.viewholders.ProductNameAndPriceViewHolder
 import com.dolatkia.horizontallycardslibrary.CartViewPagerAdapter
+import com.dolatkia.horizontallycardslibrary.PresentationUtils
 
 class MyCartViewPagerAdapter(private val activity: Activity) : CartViewPagerAdapter(activity) {
 
@@ -53,20 +54,6 @@ class MyCartViewPagerAdapter(private val activity: Activity) : CartViewPagerAdap
         return View.OnClickListener { activity.onBackPressed() }
     }
 
-    fun addFakeItems() {
-        itemTouchHelper.add(Product("240$", R.drawable.img_1))
-        itemTouchHelper.add(Product("220$", R.drawable.img_2))
-        itemTouchHelper.add(Product("190$", R.drawable.img_3))
-        itemTouchHelper.add(Product("200$", R.drawable.img_4))
-        itemTouchHelper.add(Product("80$", R.drawable.img_5))
-        itemTouchHelper.add(Product("280$", R.drawable.img_6))
-        itemTouchHelper.add(Product("340$", R.drawable.img_7))
-        itemTouchHelper.add(Product("140$", R.drawable.img_8))
-        itemTouchHelper.add(Product("140$", R.drawable.img_9))
-        itemTouchHelper.add(Product("148$", R.drawable.img_10))
-        itemTouchHelper.add(Product("148$", R.drawable.img_11))
-    }
-
     override fun loadData() {
         Handler(Looper.getMainLooper()).postDelayed(
             {
@@ -80,6 +67,27 @@ class MyCartViewPagerAdapter(private val activity: Activity) : CartViewPagerAdap
 
     override fun hasMoreData(): Boolean {
         return true
+    }
+
+    override fun getActionBarStartAnimationOffsetThreshold(
+        recyclerView: RecyclerView,
+        customActionBarView: View?
+    ): Int {
+        return PresentationUtils.convertDpToPixel(150, recyclerView.context)
+    }
+
+    fun addFakeItems() {
+        itemTouchHelper.add(Product("240$", R.drawable.img_1))
+        itemTouchHelper.add(Product("220$", R.drawable.img_2))
+        itemTouchHelper.add(Product("190$", R.drawable.img_3))
+        itemTouchHelper.add(Product("200$", R.drawable.img_4))
+        itemTouchHelper.add(Product("80$", R.drawable.img_5))
+        itemTouchHelper.add(Product("280$", R.drawable.img_6))
+        itemTouchHelper.add(Product("340$", R.drawable.img_7))
+        itemTouchHelper.add(Product("140$", R.drawable.img_8))
+        itemTouchHelper.add(Product("140$", R.drawable.img_9))
+        itemTouchHelper.add(Product("148$", R.drawable.img_10))
+        itemTouchHelper.add(Product("148$", R.drawable.img_11))
     }
 }
 
