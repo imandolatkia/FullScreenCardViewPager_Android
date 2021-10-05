@@ -8,13 +8,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:justificationMode="inter_word"
+        android:lineSpacingExtra="10dp"
         android:paddingLeft="20dp"
         android:paddingTop="20dp"
         android:paddingRight="20dp"
-        android:text="RecyclerView makes it easy to efficiently display large sets of data. You supply the data and define how each item looks, and the RecyclerView library dynamically creates the elements when they're needed.
-
-As the name implies, RecyclerView recycles those individual elements. When an item scrolls off the screen, RecyclerView doesn't destroy its view. Instead, RecyclerView reuses the view for new items that have scrolled onscreen. This reuse vastly improves performance, improving your app's responsiveness and reducing power consumption."
-        android:textColor="@color/black" />
+        android:text="A chair is a piece of furniture. It is used for sitting on and it can also be used for standing on, if you can't reach something. They usually have four legs to support the weight. Some types of chairs, such as the bar-stool, have only one leg in the center. Those chairs are usually able to spin."
+        android:textColor="#7D7D8A" />
 </FrameLayout>
 

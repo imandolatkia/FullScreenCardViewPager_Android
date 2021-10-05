@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dolatkia.horizontallycards.R
+import com.dolatkia.horizontallycards.databinding.RecyclerHorizontalRowBoxBinding
 import com.dolatkia.horizontallycardslibrary.PresentationUtils
 import java.util.*
 
@@ -30,17 +31,28 @@ class HorizontalRecyclerAdapter(private val context: Context) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return SmallBoxViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.recycler_horizontal_row_box, parent, false)
+            RecyclerHorizontalRowBoxBinding.inflate(LayoutInflater.from(context), parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is SmallBoxViewHolder) {
-            holder.setRandomColor()
+        when (position) {
+            0 -> return (holder as SmallBoxViewHolder).binding.image.setImageResource(R.drawable.img_1)
+            1 -> return (holder as SmallBoxViewHolder).binding.image.setImageResource(R.drawable.img_2)
+            2 -> return (holder as SmallBoxViewHolder).binding.image.setImageResource(R.drawable.img_3)
+            3 -> return (holder as SmallBoxViewHolder).binding.image.setImageResource(R.drawable.img_4)
+            4 -> return (holder as SmallBoxViewHolder).binding.image.setImageResource(R.drawable.img_5)
+            5 -> return (holder as SmallBoxViewHolder).binding.image.setImageResource(R.drawable.img_6)
+            6 -> return (holder as SmallBoxViewHolder).binding.image.setImageResource(R.drawable.img_7)
+            7 -> return (holder as SmallBoxViewHolder).binding.image.setImageResource(R.drawable.img_8)
+            8 -> return (holder as SmallBoxViewHolder).binding.image.setImageResource(R.drawable.img_9)
+            9 -> return (holder as SmallBoxViewHolder).binding.image.setImageResource(R.drawable.img_10)
+            10 -> return (holder as SmallBoxViewHolder).binding.image.setImageResource(R.drawable.img_11)
+
         }
     }
 
     override fun getItemCount(): Int {
-        return 2000;
+        return 11;
     }
 }
