@@ -2,6 +2,10 @@
 Endless full-screen card ViewPager inspired by apple iBook for Android
 
 </br></b>
+# Demo
+| Endless cards | Scale on scroll up | Float actionbar |
+| ------------- | ------------- | ------------- |
+| ![endless](https://user-images.githubusercontent.com/6734608/137210687-aa6bde91-b252-4575-a074-68f698c1e3e3.gif) | ![scale_2](https://user-images.githubusercontent.com/6734608/137210525-ae3ed77d-8d5c-4742-b993-fba1575bfbce.gif) | ![ezgif-1-fee8937288b4](https://user-images.githubusercontent.com/6734608/137210551-133c14c4-79ce-4cac-a794-028a089fb2ef.gif)
 
 # Features
 * Scale cards on scroll up.
@@ -152,6 +156,15 @@ open fun getCloseColor(position: Int, context: Context): Int {
   return Color.parseColor("#444444")
 }
 ```
+# Full Demo
+![all_f](https://user-images.githubusercontent.com/6734608/137210511-131b3b22-bce4-49f0-9c7f-7131b99afbbf.gif)
+
+# Stargazers
+[![Stargazers repo roster for @imandolatkia/FullScreenCardViewPager_Android](https://reporoster.com/stars/imandolatkia/FullScreenCardViewPager_Android)](https://github.com/imandolatkia/FullScreenCardViewPager_Android/stargazers)
+
+# Forkers
+[![Forkers repo roster for @imandolatkia/FullScreenCardViewPager_Android](https://reporoster.com/forks/imandolatkia/FullScreenCardViewPager_Android)](https://github.com/imandolatkia/FullScreenCardViewPager_Android/network/members)
+
 
 
 
