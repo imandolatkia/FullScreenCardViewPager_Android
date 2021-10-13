@@ -5,36 +5,58 @@ import android.graphics.Color
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseCartViewPagerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+abstract class BaseFullScreenCardViewPagerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
+    /*********** critical methods ************/
+
+    // you should create your own RecyclerView.Adapter<RecyclerView.ViewHolder>
+    // data in this adapter will save
     abstract fun getCardRecyclerViewAdapter(position: Int): RecyclerView.Adapter<RecyclerView.ViewHolder>
-    abstract fun getCardsCount(): Int
-    abstract fun onVerticalScrolled(
-        recyclerView: RecyclerView,
-        dy: Int,
-        offset: Int,
-        customActionBarView: View?
-    )
 
+    // return number of cards (except loading card, loading card will add with library)
+    abstract fun getCardsCount(): Int
+
+    // return View.OnClickListener to call when close button clicked
     abstract fun getOnCloseClickListener(position: Int, context: Context): View.OnClickListener
 
+    /*********** actionbar methods (Optional) ************/
+
+    // you should create your own actionbar custom view
     open fun onCreateActionBarCustomView(): View? {
         return null
     }
 
+    // update actionbar data with correct data
     open fun onBindActionBarCustomView(position: Int, customView: View) {}
 
+    /*********** endless cards methods (Optional) ************/
+
+    // return true if you have endless cards
+    // you can ignore it if you don't have endless cards
+    open fun hasMoreData(): Boolean {
+        return false
+    }
+
+    // load data (get from net or db)
+    // you can ignore it if you don't have endless list
+    open fun loadData() {}
+
+    /*********** listener methods (Optional) ************/
+
+    // when card scrolled vertically
+    open fun onVerticalScrolled(
+        recyclerView: RecyclerView,
+        dy: Int,
+        offset: Int,
+        customActionBarView: View?
+    ){}
+
+    // when card stopped in center
     open fun onCardSelected(
         position: Int,
         adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
     ) {
-    }
-
-    open fun loadData() {}
-
-    open fun hasMoreData(): Boolean {
-        return false
     }
 
     open fun onCardDeselected(
@@ -43,6 +65,9 @@ abstract class BaseCartViewPagerAdapter : RecyclerView.Adapter<RecyclerView.View
     ) {
     }
 
+    /*********** UI customization methods (Optional) ************/
+
+    // customize distance from top to enter actionbar
     open fun getActionBarStartAnimationOffsetThreshold(
         recyclerView: RecyclerView,
         customActionBarView: View?

@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.dolatkia.horizontallycardslibrary.CardViewPager
-        android:id="@+id/cardViewPager"
+    <com.dolatkia.horizontallycardslibrary.FullScreenCardViewPager
+        android:id="@+id/fullScreenCardViewPager"
         android:background="@color/cards_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
