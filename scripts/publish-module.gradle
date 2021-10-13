@@ -1,7 +1,7 @@
 ext {
     PUBLISH_GROUP_ID = 'com.dolatkia'
     PUBLISH_VERSION = '1.0.0'
-    PUBLISH_ARTIFACT_ID = 'endless-horizontal-cards'
+    PUBLISH_ARTIFACT_ID = 'full-screen-card-viewpager'
 }
 
 apply plugin: 'maven'

@@ -11,7 +11,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             bind:cardBackgroundColor="#FFFFFF"
-            bind:cardElevation="3dp">
+            bind:cardElevation="0dp"
+            bind:strokeWidth="0dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"

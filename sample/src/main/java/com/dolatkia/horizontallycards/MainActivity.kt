@@ -1,13 +1,47 @@
 package com.dolatkia.horizontallycards
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.Configuration
 import android.os.Bundle
-import com.dolatkia.horizontallycardslibrary.CardViewPager
+import android.view.LayoutInflater
+import androidx.appcompat.app.AppCompatActivity
+import com.dolatkia.horizontallycards.databinding.ActivityMainBinding
+import com.dolatkia.horizontallycardslibrary.PresentationUtils
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+    lateinit var adapter: MyFullScreenCardViewPagerAdapter
+    private val isRtl = false
+    private lateinit var myViewPagerListener: MyViewPagerListener
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        findViewById<CardViewPager>(R.id.cardViewPager).setAdapter(MyCartViewPagerAdapter(this), 0)
+
+        // create layout
+        binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
+
+        // set rtl
+        if (isRtl) binding.fullScreenCardViewPager.setRTL()
+
+        // set customize adapter to fullScreenCardViewPager
+        // 0 = start position
+        // adapter = your customize adapter (for more details see sample app)
+        adapter = MyFullScreenCardViewPagerAdapter(this)
+        binding.fullScreenCardViewPager.setAdapter(adapter, 0)
+
+        //create listener
+        myViewPagerListener = MyViewPagerListener(this)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        adapter.addListener(myViewPagerListener)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        adapter.removeListener(myViewPagerListener)
     }
 }

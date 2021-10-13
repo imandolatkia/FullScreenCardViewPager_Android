@@ -7,27 +7,27 @@ import android.view.View
 import androidx.core.view.ViewCompat
 import com.dolatkia.horizontallycardslibrary.databinding.ActionbarBinding
 
-class ActionBar(context: Context, var customView: View) {
+class CardActionBar(context: Context, var customView: View) {
 
     private var translationYInAnimation: ObjectAnimator? = null
     private var translationYOutAnimation: ObjectAnimator? = null
     var actionbarBinding: ActionbarBinding =
-            ActionbarBinding.inflate(LayoutInflater.from(context))
+        ActionbarBinding.inflate(LayoutInflater.from(context))
 
     init {
         actionbarBinding.actionBarBg.visibility = View.INVISIBLE
         actionbarBinding.actionBarBg.addView(customView)
         ViewCompat.setTranslationZ(
-                actionbarBinding.closeImage,
-                70f
+            actionbarBinding.closeImage,
+            70f
         )
         actionbarBinding.actionBarBg.translationY = -actionbarBinding.root.height.toFloat()
     }
 
 
     fun updateUI(
-            offset: Int,
-            titleTopOffset: Int
+        offset: Int,
+        titleTopOffset: Int
     ): Boolean {
         return if (offset <= titleTopOffset) {
             startOutAnimation()
@@ -48,11 +48,11 @@ class ActionBar(context: Context, var customView: View) {
         }
         translationYInAnimation?.cancel()
         translationYOutAnimation =
-                ObjectAnimator.ofFloat(
-                        actionbarBinding.actionBarBg,
-                        "translationY",
-                        -actionbarBinding.root.height.toFloat()
-                )
+            ObjectAnimator.ofFloat(
+                actionbarBinding.actionBarBg,
+                "translationY",
+                -actionbarBinding.root.height.toFloat()
+            )
         translationYOutAnimation?.startDelay = 0
         translationYOutAnimation?.duration = 300
         translationYOutAnimation?.start()
@@ -72,13 +72,13 @@ class ActionBar(context: Context, var customView: View) {
             translationYOutAnimation!!.cancel()
         }
         translationYInAnimation =
-                ObjectAnimator.ofFloat(actionbarBinding.actionBarBg, "translationY", 0f)
+            ObjectAnimator.ofFloat(actionbarBinding.actionBarBg, "translationY", 0f)
         translationYInAnimation?.startDelay = 0
         translationYInAnimation?.duration = 300
         translationYInAnimation?.start()
     }
 
-    public fun getView(): View {
-        return actionbarBinding.rootView;
+    fun getView(): View {
+        return actionbarBinding.rootView
     }
 }

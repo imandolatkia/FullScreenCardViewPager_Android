@@ -1,6 +1,6 @@
 package com.dolatkia.horizontallycardslibrary
 
-interface CardsChangeListener {
+interface CardChangeListener {
     fun onExpandChanged(isExpanded: Boolean)
     fun onScroll(offset: Int)
 }

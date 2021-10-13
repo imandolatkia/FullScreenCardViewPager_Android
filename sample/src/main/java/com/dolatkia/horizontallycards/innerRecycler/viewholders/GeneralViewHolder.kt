@@ -1,4 +1,4 @@
-package com.dolatkia.horizontallycards.viewholders
+package com.dolatkia.horizontallycards.innerRecycler.viewholders
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

@@ -16,31 +16,30 @@ import kotlin.math.abs
 
 
 class CardViewHolder(
-        var rootView: ViewGroup,
-        val cartViewPagerAdapter: CartViewPagerAdapter,
-        private val expandedRunnable: ArrayList<CardsChangeListener>,
-        parentHeight: Int
+    private var rootView: ViewGroup,
+    private val cartViewPagerAdapter: FullScreenCardViewPagerAdapter,
+    private val expandedRunnable: ArrayList<CardChangeListener>
 ) :
-        RecyclerView.ViewHolder(rootView) {
+    RecyclerView.ViewHolder(rootView) {
     private var layoutManager: LinearLayoutManager
     private var scale = 0f
     private var cardBeforeHeight = 0f
     var expandThreshold = 0
-    var child: MaterialCardView = itemView.findViewById(R.id.child) as MaterialCardView
+    private var child: MaterialCardView = itemView.findViewById(R.id.child) as MaterialCardView
     var recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
     var startScrollTime = 0L
-    var actionBar: ActionBar? = null
-    var actionBarVisibleThreshold = -1;
-    private var cardPosition: Int = 0;
+    var cardActionBar: CardActionBar? = null
+    private var actionBarVisibleThreshold = -1
+    private var cardPosition: Int = 0
     private var isExpanded = false
 
     init {
         //fix size
         scale =
-                (PresentationUtils.getScreenWidthInPx(itemView.context) - PresentationUtils.convertDpToPixel(
-                        30,
-                        itemView.context
-                )) / PresentationUtils.getScreenWidthInPx(itemView.context).toFloat()
+            (PresentationUtils.getScreenWidthInPx(itemView.context) - PresentationUtils.convertDpToPixel(
+                30,
+                itemView.context
+            )) / PresentationUtils.getScreenWidthInPx(itemView.context).toFloat()
         expandThreshold = PresentationUtils.convertDpToPixel(50, itemView.context)
 
         cardBeforeHeight = PresentationUtils.getScreenHeightInPx(itemView.context) / scale
@@ -52,13 +51,18 @@ class CardViewHolder(
 
         //create and set layoutManager
         this.layoutManager = LinearLayoutManager(
-                itemView.context,
-                LinearLayoutManager.VERTICAL, false
+            itemView.context,
+            LinearLayoutManager.VERTICAL, false
         )
         recyclerView.layoutManager = layoutManager
 
 
-        child.setCardBackgroundColor(cartViewPagerAdapter.getCardsColor(cardPosition, child.context))
+        child.setCardBackgroundColor(
+            cartViewPagerAdapter.getCardsColor(
+                cardPosition,
+                child.context
+            )
+        )
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
@@ -84,7 +88,12 @@ class CardViewHolder(
                     return
                 }
 
-                cartViewPagerAdapter.onVerticalScrolled(recyclerView, dy, getTopOffset(), actionBar?.customView)
+                cartViewPagerAdapter.onVerticalScrolled(
+                    recyclerView,
+                    dy,
+                    getTopOffset(),
+                    cardActionBar?.customView
+                )
                 onScroll()
             }
 
@@ -95,33 +104,42 @@ class CardViewHolder(
 
     private fun setTopRadius(radius: Float) {
         child.shapeAppearanceModel =
-                child.shapeAppearanceModel
-                        .toBuilder()
-                        .setTopLeftCorner(
-                                CornerFamily.ROUNDED,
-                                radius
-                        )
-                        .setTopRightCorner(
-                                CornerFamily.ROUNDED,
-                                radius
-                        )
-                        .setBottomRightCorner(CornerFamily.ROUNDED, 0f)
-                        .setBottomLeftCorner(CornerFamily.ROUNDED, 0f)
-                        .build()
+            child.shapeAppearanceModel
+                .toBuilder()
+                .setTopLeftCorner(
+                    CornerFamily.ROUNDED,
+                    radius
+                )
+                .setTopRightCorner(
+                    CornerFamily.ROUNDED,
+                    radius
+                )
+                .setBottomRightCorner(CornerFamily.ROUNDED, 0f)
+                .setBottomLeftCorner(CornerFamily.ROUNDED, 0f)
+                .build()
     }
 
     fun onScroll() {
         val offset: Int = getTopOffset()
         setCardScale(offset)
-        var isActionbarVisible = updateActionBar(offset)
-        cartViewPagerAdapter.recyclersSavedData.put(cardPosition, recyclerView.layoutManager?.onSaveInstanceState()?.let { RecyclerSavedData(it, actionBarVisibleThreshold, isExpanded, isActionbarVisible) })
+        val isActionbarVisible = updateActionBar(offset)
+        cartViewPagerAdapter.recyclersSavedData.put(
+            cardPosition,
+            recyclerView.layoutManager?.onSaveInstanceState()?.let {
+                RecyclerSavedData(
+                    it,
+                    actionBarVisibleThreshold,
+                    isExpanded,
+                    isActionbarVisible
+                )
+            })
     }
 
     private fun setCardScale(offset: Int) {
         val startScale = scale
         val finalScale = 1f
         val param =
-                child.layoutParams as FrameLayout.LayoutParams
+            child.layoutParams as FrameLayout.LayoutParams
 
         if (expandThreshold != 0 && offset <= expandThreshold) {
 
@@ -132,12 +150,16 @@ class CardViewHolder(
 
             param.height = cardBeforeHeight.toInt()
             val scaleX =
-                    startScale + offset / expandThreshold.toFloat() * (finalScale - startScale)
+                startScale + offset / expandThreshold.toFloat() * (finalScale - startScale)
             child.scaleX = scaleX
             child.scaleY = scaleX
 
             notifyOnScroll(offset)
-            setTopRadius(((1 - (offset / expandThreshold.toFloat())) * cartViewPagerAdapter.getCardRadius(itemView.context)))
+            setTopRadius(
+                ((1 - (offset / expandThreshold.toFloat())) * cartViewPagerAdapter.getCardRadius(
+                    itemView.context
+                ))
+            )
         } else {
 
             if (!isExpanded) {
@@ -150,22 +172,26 @@ class CardViewHolder(
             child.scaleY = finalScale
 
             child.shapeAppearanceModel =
-                    child.shapeAppearanceModel
-                            .toBuilder()
-                            .setTopLeftCorner(CornerFamily.ROUNDED, 0f)
-                            .setTopRightCorner(CornerFamily.ROUNDED, 0f)
-                            .setBottomRightCorner(CornerFamily.ROUNDED, 0f)
-                            .setBottomLeftCorner(CornerFamily.ROUNDED, 0f)
-                            .build()
+                child.shapeAppearanceModel
+                    .toBuilder()
+                    .setTopLeftCorner(CornerFamily.ROUNDED, 0f)
+                    .setTopRightCorner(CornerFamily.ROUNDED, 0f)
+                    .setBottomRightCorner(CornerFamily.ROUNDED, 0f)
+                    .setBottomLeftCorner(CornerFamily.ROUNDED, 0f)
+                    .build()
         }
         child.layoutParams = param
     }
 
     private fun updateActionBar(offset: Int): Boolean {
         if (actionBarVisibleThreshold == -1) {
-            actionBarVisibleThreshold = cartViewPagerAdapter.getActionBarStartAnimationOffsetThreshold(recyclerView, actionBar?.customView)
+            actionBarVisibleThreshold =
+                cartViewPagerAdapter.getActionBarStartAnimationOffsetThreshold(
+                    recyclerView,
+                    cardActionBar?.customView
+                )
         }
-        return actionBar?.updateUI(offset, actionBarVisibleThreshold) == true
+        return cardActionBar?.updateUI(offset, actionBarVisibleThreshold) == true
     }
 
     var smoothScroller: SmoothScroller = object : LinearSmoothScroller(itemView.context) {
@@ -176,28 +202,49 @@ class CardViewHolder(
         override fun calculateSpeedPerPixel(displayMetrics: DisplayMetrics?): Float {
             if (displayMetrics != null) {
                 return 300f / displayMetrics.densityDpi
-            };
+            }
             return super.calculateSpeedPerPixel(displayMetrics)
         }
     }
 
     fun setActionBarCustomView(view: View?) {
-        if(view == null){
+        if (view == null) {
             return
         }
-        actionBar = ActionBar(itemView.context, view)
-        actionBar?.actionbarBinding?.closeImage?.setImageResource(cartViewPagerAdapter.getCloseResId(cardPosition, child.context))
-        actionBar?.actionbarBinding?.closeImage?.setColorFilter(cartViewPagerAdapter.getCloseColor(cardPosition, child.context))
-        actionBar?.actionbarBinding?.closeImage?.setOnClickListener(cartViewPagerAdapter.getOnCloseClickListener(cardPosition, child.context))
-        ViewCompat.setTranslationZ(
-                actionBar!!.getView(),
-                60f
+        cardActionBar = CardActionBar(itemView.context, view)
+        cardActionBar?.actionbarBinding?.closeImage?.setImageResource(
+            cartViewPagerAdapter.getCloseResId(
+                cardPosition,
+                child.context
+            )
         )
-        this.rootView.addView(actionBar!!.getView(), ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+        cardActionBar?.actionbarBinding?.closeImage?.setColorFilter(
+            cartViewPagerAdapter.getCloseColor(
+                cardPosition,
+                child.context
+            )
+        )
+        cardActionBar?.actionbarBinding?.closeImage?.setOnClickListener(
+            cartViewPagerAdapter.getOnCloseClickListener(
+                cardPosition,
+                child.context
+            )
+        )
+        ViewCompat.setTranslationZ(
+            cardActionBar!!.getView(),
+            60f
+        )
+        this.rootView.addView(
+            cardActionBar!!.getView(),
+            ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+        )
     }
 
     fun getActionbarCustomView(): View? {
-        return actionBar?.customView
+        return cardActionBar?.customView
     }
 
     fun setCardPosition(cardPosition: Int) {
