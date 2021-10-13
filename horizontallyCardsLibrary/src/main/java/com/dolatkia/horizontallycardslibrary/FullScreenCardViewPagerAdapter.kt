@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.dolatkia.horizontallycardslibrary.databinding.ItemCardLoadingBinding
 
 abstract class FullScreenCardViewPagerAdapter(private val context: Context) :
     BaseFullScreenCardViewPagerAdapter() {
@@ -40,8 +41,7 @@ abstract class FullScreenCardViewPagerAdapter(private val context: Context) :
             holder
         } else {
             LoadingCardViewHolder(
-                LayoutInflater.from(context)
-                    .inflate(R.layout.item_card_loading, parent, false)
+                ItemCardLoadingBinding.inflate(LayoutInflater.from(context), parent, false)
             )
         }
     }
@@ -66,6 +66,10 @@ abstract class FullScreenCardViewPagerAdapter(private val context: Context) :
                 }
             }
         } else if (!isloadingData) {
+            val loadingCardViewHolder: LoadingCardViewHolder = holder as LoadingCardViewHolder
+            loadingCardViewHolder.setBackgroundColor(getCardsColor(position, context))
+            loadingCardViewHolder.setTopRadius(getCardRadius(context).toFloat())
+
             isloadingData = true
             loadData()
         }
