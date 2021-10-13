@@ -156,7 +156,7 @@ class CardViewHolder(
 
             notifyOnScroll(offset)
             setTopRadius(
-                (1 - (offset / expandThreshold.toFloat())) * cartViewPagerAdapter.getCardRadius(
+                (1 - offset / expandThreshold.toFloat()) * cartViewPagerAdapter.getCardRadius(
                     itemView.context
                 )
             )
