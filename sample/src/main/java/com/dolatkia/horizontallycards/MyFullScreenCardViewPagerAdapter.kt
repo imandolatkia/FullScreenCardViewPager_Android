@@ -20,6 +20,7 @@ import com.dolatkia.horizontallycardslibrary.PresentationUtils
 class MyFullScreenCardViewPagerAdapter(private val activity: Activity) :
     FullScreenCardViewPagerAdapter(activity) {
 
+    // list of products that you should fill it yourself
     private val productsList = arrayListOf<Product>()
 
     init {
@@ -31,13 +32,13 @@ class MyFullScreenCardViewPagerAdapter(private val activity: Activity) :
     /*********** critical methods ************/
     /** see BaseFullScreenCardViewPagerAdapter for more features and documentation ***/
 
-    // you should create your own RecyclerView.Adapter<RecyclerView.ViewHolder>
+    // you should create your own RecyclerView.Adapter<RecyclerView.ViewHolder> for each card with the given position
     // data in this adapter will save
     override fun getCardRecyclerViewAdapter(position: Int): RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return InnerRecyclerAdapter(activity, position, productsList[position])
     }
 
-    // return number of cards (except loading card, loading card will add with library)
+    // return number of cards (except loading card, loading card will add with the library)
     override fun getCardsCount(): Int {
         return productsList.size
     }
@@ -48,11 +49,13 @@ class MyFullScreenCardViewPagerAdapter(private val activity: Activity) :
     }
 
     /*********** actionbar methods (Optional) ************/
+
+    // create and return actionbar view
     override fun onCreateActionBarCustomView(): View {
         return ItemActionbarBinding.inflate(activity.layoutInflater).root
     }
 
-    // update actionbar data with correct data
+    // update actionbar view with relevant data
     override fun onBindActionBarCustomView(position: Int, customView: View) {
         ("Beautiful Chair " + (position + 1).toString()).also {
             ItemActionbarBinding.bind(customView).title.text = it
@@ -62,15 +65,15 @@ class MyFullScreenCardViewPagerAdapter(private val activity: Activity) :
     /*********** endless cards methods (Optional) ************/
     /** see BaseFullScreenCardViewPagerAdapter for more features and documentation ***/
 
-    // return true if you have endless cards
+    // return true if you have endless cards and your data is incomplete,
+    // return false if you don't have endless cards or you get all data or
     // you can ignore it if you don't have endless cards
     override fun hasMoreData(): Boolean {
-
         return true
     }
 
-    // load data (get from net or db)
-    // you can ignore it if you don't have endless list
+    // load data (from server or db) in this method and add it to the adapter
+    // you should  manage your load data sequence yourself
     override fun loadData() {
 
         Handler(Looper.getMainLooper()).postDelayed(
@@ -80,7 +83,7 @@ class MyFullScreenCardViewPagerAdapter(private val activity: Activity) :
                 // call this method when new data is ready
                 dataLoaded()
             },
-            1000 // value in milliseconds
+            2000 // value in milliseconds
         )
     }
 

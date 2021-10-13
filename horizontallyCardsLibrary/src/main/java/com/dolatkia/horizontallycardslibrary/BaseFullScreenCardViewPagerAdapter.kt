@@ -10,11 +10,11 @@ abstract class BaseFullScreenCardViewPagerAdapter : RecyclerView.Adapter<Recycle
 
     /*********** critical methods ************/
 
-    // you should create your own RecyclerView.Adapter<RecyclerView.ViewHolder>
+    // you should create your own RecyclerView.Adapter<RecyclerView.ViewHolder> for each card with the given position
     // data in this adapter will save
     abstract fun getCardRecyclerViewAdapter(position: Int): RecyclerView.Adapter<RecyclerView.ViewHolder>
 
-    // return number of cards (except loading card, loading card will add with library)
+    // return number of cards (except loading card, loading card will add with the library)
     abstract fun getCardsCount(): Int
 
     // return View.OnClickListener to call when close button clicked
@@ -22,24 +22,25 @@ abstract class BaseFullScreenCardViewPagerAdapter : RecyclerView.Adapter<Recycle
 
     /*********** actionbar methods (Optional) ************/
 
-    // you should create your own actionbar custom view
+    // create and return actionbar view
     open fun onCreateActionBarCustomView(): View? {
         return null
     }
 
-    // update actionbar data with correct data
+    // update actionbar view with relevant data
     open fun onBindActionBarCustomView(position: Int, customView: View) {}
 
     /*********** endless cards methods (Optional) ************/
 
-    // return true if you have endless cards
+    // return true if you have endless cards and your data is incomplete,
+    // return false if you don't have endless cards or you get all data or
     // you can ignore it if you don't have endless cards
     open fun hasMoreData(): Boolean {
         return false
     }
 
-    // load data (get from net or db)
-    // you can ignore it if you don't have endless list
+    // load data (from server or db) in this method and add it to the adapter
+    // you should  manage your load data sequence yourself
     open fun loadData() {}
 
     /*********** listener methods (Optional) ************/
@@ -75,18 +76,22 @@ abstract class BaseFullScreenCardViewPagerAdapter : RecyclerView.Adapter<Recycle
         return PresentationUtils.convertDpToPixel(50, recyclerView.context)
     }
 
+    // customize cards background-color
     open fun getCardsColor(position: Int, context: Context): Int {
         return Color.parseColor("#ffffff")
     }
 
+    // customize cards top-radius
     open fun getCardRadius(context: Context): Int {
         return PresentationUtils.convertDpToPixel(15, context)
     }
 
+    // customize close icon
     open fun getCloseResId(position: Int, context: Context): Int {
         return R.drawable.ic_close
     }
 
+    // customize close color
     open fun getCloseColor(position: Int, context: Context): Int {
         return Color.parseColor("#444444")
     }

@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         // set customize adapter to fullScreenCardViewPager
         // 0 = start position
-        // MyFullScreenCardViewPagerAdapter = my customize adapter
+        // adapter = your customize adapter (for more details see sample app)
         adapter = MyFullScreenCardViewPagerAdapter(this)
         binding.fullScreenCardViewPager.setAdapter(adapter, 0)
 
