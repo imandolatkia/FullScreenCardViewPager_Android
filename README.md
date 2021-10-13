@@ -1,4 +1,8 @@
 # FullScreenCardViewPager for Android
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Generic badge](https://img.shields.io/badge/kotlin-100-blue.svg)](https://github.com/imandolatkia/Android-Animated-Theme-Manager/search?l=kotlin)
+[![Generic badge](https://img.shields.io/badge/support-java_&_kotlin-green.svg)](https://github.com/imandolatkia/Android-Animated-Theme-Manager/search?l=kotlin)
+
 Endless full-screen card ViewPager inspired by apple iBook for Android
 
 </br></b>
