@@ -14,6 +14,10 @@ Endless full-screen card ViewPager inspired by apple iBook for Android
 | ------------- | ------------- | ------------- |
 | ![endless](https://user-images.githubusercontent.com/6734608/137210687-aa6bde91-b252-4575-a074-68f698c1e3e3.gif) | ![scale_2](https://user-images.githubusercontent.com/6734608/137210525-ae3ed77d-8d5c-4742-b993-fba1575bfbce.gif) | ![ezgif-1-fee8937288b4](https://user-images.githubusercontent.com/6734608/137210551-133c14c4-79ce-4cac-a794-028a089fb2ef.gif)
 
+### [Download sample APK File 📥 ](https://raw.githubusercontent.com/imandolatkia/FullScreenCardViewPager_Android/master/apk/FullScreenCardViewPager.apk)
+
+<br><br>
+
 # Features
 * Scale cards on scroll up.
 * Endless (from server or database).
