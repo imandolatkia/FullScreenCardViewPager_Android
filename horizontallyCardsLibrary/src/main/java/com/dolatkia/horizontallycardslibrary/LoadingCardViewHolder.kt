@@ -1,19 +1,21 @@
 package com.dolatkia.horizontallycardslibrary
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.dolatkia.horizontallycardslibrary.databinding.ItemCardLoadingBinding
 import com.google.android.material.shape.CornerFamily
 
-class LoadingCardViewHolder(var binding: ItemCardLoadingBinding) :
+class LoadingCardViewHolder(var binding: ItemCardLoadingBinding, topRadius: Float) :
     RecyclerView.ViewHolder(binding.root) {
+
+    init {
+        setTopRadius(topRadius)
+    }
 
     fun setBackgroundColor(color: Int) {
         binding.card.setCardBackgroundColor(color)
     }
 
-
-    fun setTopRadius(radius: Float) {
+    private fun setTopRadius(radius: Float) {
         binding.card.shapeAppearanceModel =
             binding.card.shapeAppearanceModel
                 .toBuilder()
@@ -29,5 +31,4 @@ class LoadingCardViewHolder(var binding: ItemCardLoadingBinding) :
                 .setBottomLeftCorner(CornerFamily.ROUNDED, 0f)
                 .build()
     }
-
 }

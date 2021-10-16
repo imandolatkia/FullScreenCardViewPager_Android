@@ -9,5 +9,4 @@ class ProductImageViewHolder(private var binding: RecyclerTopImageBinding) :
     fun setImage(resId: Int) {
         binding.image.setImageResource(resId)
     }
-
 }

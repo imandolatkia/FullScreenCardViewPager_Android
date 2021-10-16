@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dolatkia.horizontallycards.R
 import com.dolatkia.horizontallycards.databinding.RecyclerRowNameAndPriceBinding
 import com.dolatkia.horizontallycards.databinding.RecyclerTopImageBinding
-import com.dolatkia.horizontallycards.innerRecycler.viewholders.GeneralViewHolder
 import com.dolatkia.horizontallycards.innerRecycler.innerRecyclerHorizontalRecycler.InnerRecycleHorizontalBoxesViewHolder
+import com.dolatkia.horizontallycards.innerRecycler.viewholders.GeneralViewHolder
 import com.dolatkia.horizontallycards.innerRecycler.viewholders.ProductImageViewHolder
 import com.dolatkia.horizontallycards.innerRecycler.viewholders.ProductNameAndPriceViewHolder
 import com.dolatkia.horizontallycards.model.Product

@@ -7,7 +7,6 @@ import android.os.Build
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
-import androidx.core.content.ContextCompat
 import kotlin.math.roundToInt
 
 class PresentationUtils {

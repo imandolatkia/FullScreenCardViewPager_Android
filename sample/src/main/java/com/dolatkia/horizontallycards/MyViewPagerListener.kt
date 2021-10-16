@@ -12,9 +12,15 @@ class MyViewPagerListener(var activity: Activity) : CardChangeListener {
 
     override fun onExpandChanged(isExpanded: Boolean) {
         if (isExpanded) {
-            changeStatusParColor(ContextCompat.getColor(activity, R.color.cards_background), ContextCompat.getColor(activity, R.color.white))
+            changeStatusParColor(
+                ContextCompat.getColor(activity, R.color.cards_background),
+                ContextCompat.getColor(activity, R.color.white)
+            )
         } else {
-            changeStatusParColor(ContextCompat.getColor(activity, R.color.white),ContextCompat.getColor(activity, R.color.cards_background))
+            changeStatusParColor(
+                ContextCompat.getColor(activity, R.color.white),
+                ContextCompat.getColor(activity, R.color.cards_background)
+            )
         }
     }
 

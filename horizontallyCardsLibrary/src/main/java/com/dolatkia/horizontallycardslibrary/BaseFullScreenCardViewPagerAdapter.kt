@@ -5,7 +5,8 @@ import android.graphics.Color
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseFullScreenCardViewPagerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+abstract class BaseFullScreenCardViewPagerAdapter :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     /*********** critical methods ************/
@@ -51,7 +52,8 @@ abstract class BaseFullScreenCardViewPagerAdapter : RecyclerView.Adapter<Recycle
         dy: Int,
         offset: Int,
         customActionBarView: View?
-    ){}
+    ) {
+    }
 
     // when card stopped in center
     open fun onCardSelected(

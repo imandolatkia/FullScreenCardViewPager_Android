@@ -66,8 +66,8 @@ class MyFullScreenCardViewPagerAdapter(private val activity: Activity) :
     /** see BaseFullScreenCardViewPagerAdapter for more features and documentation ***/
 
     // return true if you have endless cards and your data is incomplete,
-    // return false if you don't have endless cards or you get all data or
-    // you can ignore it if you don't have endless cards
+    // return false if you don't have endless cards or you get all data
+    // or you can ignore it if you don't have endless cards
     override fun hasMoreData(): Boolean {
         return true
     }
