@@ -54,9 +54,4 @@ class MainFragment : Fragment() {
         super.onPause()
         adapter.removeListener(myViewPagerListener)
     }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        binding.fullScreenCardViewPager.onConfigurationChanged(newConfig)
-    }
 }
