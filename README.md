@@ -6,7 +6,9 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/imandolatkia/fullscreencardviewpager_android/badge/master)](https://www.codefactor.io/repository/github/imandolatkia/fullscreencardviewpager_android/overview/master)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=imandolatkia_FullScreenCardViewPager_Android&metric=alert_status)](https://sonarcloud.io/dashboard?id=imandolatkia_FullScreenCardViewPager_Android)
 
-Endless full-screen card ViewPager inspired by apple iBook for Android
+Endless full-screen card ViewPager inspired by apple iBook for Android.
+
+**✅We are open to any new feature request, bug fix request, and pull request.**
 
 </br></b>
 # Demo
