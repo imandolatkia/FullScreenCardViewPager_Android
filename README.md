@@ -6,13 +6,19 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/imandolatkia/fullscreencardviewpager_android/badge/master)](https://www.codefactor.io/repository/github/imandolatkia/fullscreencardviewpager_android/overview/master)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=imandolatkia_FullScreenCardViewPager_Android&metric=alert_status)](https://sonarcloud.io/dashboard?id=imandolatkia_FullScreenCardViewPager_Android)
 
-Endless full-screen card ViewPager inspired by apple iBook for Android
+Endless full-screen card ViewPager inspired by apple iBook for Android.
+
+**✅We are open to any new feature request, bug fix request, and pull request.**
 
 </br></b>
 # Demo
 | Endless cards | Scale on scroll up | Float actionbar |
 | ------------- | ------------- | ------------- |
 | ![endless](https://user-images.githubusercontent.com/6734608/137210687-aa6bde91-b252-4575-a074-68f698c1e3e3.gif) | ![scale_2](https://user-images.githubusercontent.com/6734608/137210525-ae3ed77d-8d5c-4742-b993-fba1575bfbce.gif) | ![ezgif-1-fee8937288b4](https://user-images.githubusercontent.com/6734608/137210551-133c14c4-79ce-4cac-a794-028a089fb2ef.gif)
+
+### [Download sample APK File 📥 ](https://raw.githubusercontent.com/imandolatkia/FullScreenCardViewPager_Android/master/apk/FullScreenCardViewPager.apk)
+
+<br><br>
 
 # Features
 * Scale cards on scroll up.
@@ -40,8 +46,11 @@ dependencies {
 
 </br></b>
 
-# How to use it?
-**Step 1:** Create ```FullScreenCardViewPager``` in your Activity/Fragment. you can create it with java/kotlin code or use it in layout xml file:
+# How to use it in 3 steps?
+Our library is based on ```RecyclerView```, we need a ```RecyclerView.Adapter``` for each card.
+So let's start: 
+### Step 1
+Add ```FullScreenCardViewPager``` to your Fragment/Activity layout xml file:
 ```xml
     <com.dolatkia.horizontallycardslibrary.FullScreenCardViewPager
         android:id="@+id/fullScreenCardViewPager"
@@ -50,7 +59,8 @@ dependencies {
         android:layout_height="match_parent" />
 ```
 </br></b>
-**Step 2:** Create adapter class that extends from```FullScreenCardViewPagerAdapter``` and override 3 abstract methods:
+### Step 2
+Create adapter class that extends from```FullScreenCardViewPagerAdapter``` and override 3 abstract methods:
 ```kotlin
 class MyFullScreenCardViewPagerAdapter(private val activity: Activity) :
     FullScreenCardViewPagerAdapter(activity) {
@@ -77,9 +87,11 @@ class MyFullScreenCardViewPagerAdapter(private val activity: Activity) :
 
 ```
 ```productsList``` = list of products that you should fill it yourself, each product is for one card.</br>```InnerRecyclerAdapter``` =  is your custom  RecyclerView.Adapter to display in each card. for more details see sample app.
+
 </br></b>
 
-**Step 3:** set adapter created in step 2 for FullScreenCardViewPager created in step 1. all done :)
+### Step 3
+Set ```adapter``` created in step 2 for ```FullScreenCardViewPager``` created in step 1.
 ```kotlin
 // set customize adapter to fullScreenCardViewPager
 // 0 = start position
@@ -87,6 +99,7 @@ class MyFullScreenCardViewPagerAdapter(private val activity: Activity) :
 adapter = MyFullScreenCardViewPagerAdapter(this)
 binding.fullScreenCardViewPager.setAdapter(adapter, 0)
 ```
+ ### All done :)
 
 </br></b>
 
