@@ -50,7 +50,7 @@ dependencies {
 Our library is based on recycler view, we need a RecyclerView.Adapter for each card.
 So let's start: 
 ### Step 1
-Create ```FullScreenCardViewPager``` in your Activity/Fragment. you can create it with java/kotlin code or use it in layout xml file:
+Add ```FullScreenCardViewPager``` to your Fragment/Activity layout xml file:
 ```xml
     <com.dolatkia.horizontallycardslibrary.FullScreenCardViewPager
         android:id="@+id/fullScreenCardViewPager"
@@ -90,7 +90,7 @@ class MyFullScreenCardViewPagerAdapter(private val activity: Activity) :
 </br></b>
 
 ### Step 3
-set adapter created in step 2 for FullScreenCardViewPager created in step 1. all done :)
+Set adapter created in step 2 for FullScreenCardViewPager created in step 1. all done :)
 ```kotlin
 // set customize adapter to fullScreenCardViewPager
 // 0 = start position
