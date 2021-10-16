@@ -46,8 +46,11 @@ dependencies {
 
 </br></b>
 
-# How to use it?
-**Step 1:** Create ```FullScreenCardViewPager``` in your Activity/Fragment. you can create it with java/kotlin code or use it in layout xml file:
+# How to use it in 3 steps?
+Our library is based on recycler view, we need a RecyclerView.Adapter for each card.
+So let's start: 
+### Step 1
+Create ```FullScreenCardViewPager``` in your Activity/Fragment. you can create it with java/kotlin code or use it in layout xml file:
 ```xml
     <com.dolatkia.horizontallycardslibrary.FullScreenCardViewPager
         android:id="@+id/fullScreenCardViewPager"
@@ -56,7 +59,8 @@ dependencies {
         android:layout_height="match_parent" />
 ```
 </br></b>
-**Step 2:** Create adapter class that extends from```FullScreenCardViewPagerAdapter``` and override 3 abstract methods:
+### Step 2
+Create adapter class that extends from```FullScreenCardViewPagerAdapter``` and override 3 abstract methods:
 ```kotlin
 class MyFullScreenCardViewPagerAdapter(private val activity: Activity) :
     FullScreenCardViewPagerAdapter(activity) {
@@ -85,7 +89,8 @@ class MyFullScreenCardViewPagerAdapter(private val activity: Activity) :
 ```productsList``` = list of products that you should fill it yourself, each product is for one card.</br>```InnerRecyclerAdapter``` =  is your custom  RecyclerView.Adapter to display in each card. for more details see sample app.
 </br></b>
 
-**Step 3:** set adapter created in step 2 for FullScreenCardViewPager created in step 1. all done :)
+### Step 3
+set adapter created in step 2 for FullScreenCardViewPager created in step 1. all done :)
 ```kotlin
 // set customize adapter to fullScreenCardViewPager
 // 0 = start position
