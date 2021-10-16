@@ -25,7 +25,7 @@ Endless full-screen card ViewPager inspired by apple iBook for Android.
 * Endless (from server or database).
 * Show loading card.
 * Floating actionbar.
-* Save position when fragments changed or onConfigurationChanged().
+* Save position when fragments changed or onConfigurationChanged() called.
 * Lock horizontal scroll after card expanded.
 * Push side cards on card scale.
 * Support **java** and **kotlin** projects.
