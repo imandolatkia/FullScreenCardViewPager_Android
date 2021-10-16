@@ -25,6 +25,7 @@ Endless full-screen card ViewPager inspired by apple iBook for Android.
 * Endless (from server or database).
 * Show loading card.
 * Floating actionbar.
+* Save position when fragments are changed or onConfigurationChanged() called.
 * Lock horizontal scroll after card expanded.
 * Push side cards on card scale.
 * Support **java** and **kotlin** projects.
@@ -144,6 +145,11 @@ override fun loadData() {
 }
 ```
 </br></b>
+## Save positions:
+To save cards position and inner card scroll position when fragments are changed or ```onConfigurationChange()``` called (land<->portrate), Just create customize ```FullScreenCardViewPagerAdapter``` instance in ```onCreate()``` method of the fragment **to avoid recreate it**. for more information see the sample app.
+[Demo](#more-demo)
+
+</br></b>
 ## Customize UI:
 To customize UI override these methods in your adapter:
 
@@ -176,8 +182,10 @@ open fun getCloseColor(position: Int, context: Context): Int {
   return Color.parseColor("#444444")
 }
 ```
-# Full Demo
-![all_f](https://user-images.githubusercontent.com/6734608/137210511-131b3b22-bce4-49f0-9c7f-7131b99afbbf.gif)
+# More Demo
+| Inner card horizontal scroll  | Save position |
+| ------------- | ------------- |
+| ![all_f](https://user-images.githubusercontent.com/6734608/137210511-131b3b22-bce4-49f0-9c7f-7131b99afbbf.gif) | ![ezgif-2-f999221f9053](https://user-images.githubusercontent.com/6734608/137597682-7382fe16-c405-4a96-b493-65c1e6a15d0f.gif) |
 
 # Stargazers
 [![Stargazers repo roster for @imandolatkia/FullScreenCardViewPager_Android](https://reporoster.com/stars/imandolatkia/FullScreenCardViewPager_Android)](https://github.com/imandolatkia/FullScreenCardViewPager_Android/stargazers)
