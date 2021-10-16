@@ -47,7 +47,7 @@ dependencies {
 </br></b>
 
 # How to use it in 3 steps?
-Our library is based on recycler view, we need a RecyclerView.Adapter for each card.
+Our library is based on ```RecyclerView```, we need a ```RecyclerView.Adapter``` for each card.
 So let's start: 
 ### Step 1
 Add ```FullScreenCardViewPager``` to your Fragment/Activity layout xml file:
@@ -87,10 +87,11 @@ class MyFullScreenCardViewPagerAdapter(private val activity: Activity) :
 
 ```
 ```productsList``` = list of products that you should fill it yourself, each product is for one card.</br>```InnerRecyclerAdapter``` =  is your custom  RecyclerView.Adapter to display in each card. for more details see sample app.
+
 </br></b>
 
 ### Step 3
-Set adapter created in step 2 for FullScreenCardViewPager created in step 1. all done :)
+Set ```adapter``` created in step 2 for ```FullScreenCardViewPager``` created in step 1.
 ```kotlin
 // set customize adapter to fullScreenCardViewPager
 // 0 = start position
@@ -98,6 +99,7 @@ Set adapter created in step 2 for FullScreenCardViewPager created in step 1. all
 adapter = MyFullScreenCardViewPagerAdapter(this)
 binding.fullScreenCardViewPager.setAdapter(adapter, 0)
 ```
+ ### All done :)
 
 </br></b>
 
