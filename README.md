@@ -8,7 +8,7 @@
 
 Endless full-screen card ViewPager inspired by apple iBook for Android.
 
-**✅We are open to any new feature request, bug fix request, and pull request.**
+**✅ We are open to any new feature request, bug fix request, and pull request.**
 
 </br></b>
 # Demo
