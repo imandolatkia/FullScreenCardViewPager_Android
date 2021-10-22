@@ -28,6 +28,7 @@ Endless full-screen card ViewPager inspired by apple iBook for Android.
 * Save position when fragments are changed or onConfigurationChanged() called.
 * Lock horizontal scroll after card expanded.
 * Push side cards on card scale.
+* Support RTL.
 * Support **java** and **kotlin** projects.
 * Easy to use (3 tiny steps).
 * Support API > 16.
@@ -148,6 +149,14 @@ override fun loadData() {
 ## Save positions:
 To save cards position and inner card scroll position when fragments are changed or ```onConfigurationChange()``` called (land<->portrate), Just create customize ```FullScreenCardViewPagerAdapter``` instance in ```onCreate()``` method of the fragment **to avoid recreate it**. for more information see the sample app.
 [Demo](#more-demo)
+
+</br></b>
+## RTL (Right To Left) scroll:
+call ```setRTL()``` method of ```fullScreenCardViewPager``` ,**before** set it's adapter 
+```kotlin
+binding.fullScreenCardViewPager.setRTL()
+```
+```setRTL()``` doesn't work properly on API 28, contact me for the solution.
 
 </br></b>
 ## Customize UI:
