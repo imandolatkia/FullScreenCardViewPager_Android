@@ -155,6 +155,9 @@ To save cards position and inner card scroll position when fragments are changed
 call ```setRTL()``` method of ```fullScreenCardViewPager``` ,**before** set it's adapter 
 ```kotlin
 binding.fullScreenCardViewPager.setRTL()
+// setAdapter() after setRtl()
+binding.fullScreenCardViewPager.setAdapter(adapter, 0)
+
 ```
 ```setRTL()``` doesn't work properly on API 28, contact me for the solution.
 
